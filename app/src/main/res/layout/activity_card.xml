@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CardActivity">
+
+    <View
+        android:id="@+id/top_panel"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/blue"/>
+
+    <TextView
+        android:id="@+id/tv_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/top_panel"
+        app:layout_constraintTop_toTopOf="@id/top_panel"
+        app:layout_constraintBottom_toBottomOf="@id/top_panel"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text=""/>
+
+    <ImageView
+        android:id="@+id/img_category"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/fruit"
+        app:layout_constraintTop_toTopOf="@id/top_panel"
+        app:layout_constraintEnd_toEndOf="@id/top_panel"
+        app:layout_constraintBottom_toBottomOf="@id/top_panel"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.22"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/tv_transcription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_word"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.01"
+        android:textSize="24sp"
+        android:textColor="@color/forest_green"
+        android:text=""/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="350dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_translation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:paddingBottom="120dp"
+        android:background="@color/aqua"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/b_know"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        android:backgroundTint="@color/forest_green"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Знаю"/>
+
+    <Button
+        android:id="@+id/b_dont_know"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/b_know"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/firebrick"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Не знаю"/>
+
+    <Button
+        android:id="@+id/b_show_answer"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:backgroundTint="@color/teal_700"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Далее"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
