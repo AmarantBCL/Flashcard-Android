@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.flashcard.databinding.ActivityCardBinding;
 import com.example.android.flashcard.model.Flashcard;
+import com.example.android.flashcard.model.Level;
 import com.example.android.flashcard.model.Vocabulary;
 
 public class CardActivity extends AppCompatActivity {
@@ -20,29 +21,15 @@ public class CardActivity extends AppCompatActivity {
 
         Bundle arguments = getIntent().getExtras();
         int cardAmount = arguments.getInt("card_amount");
+        int difficulty = arguments.getInt("difficulty");
 
         Vocabulary.cardAmount = cardAmount;
+        int id = Level.A1.ordinal();
+        Vocabulary.difficulty = difficulty;
         Flashcard flashcard = new Flashcard(binding, this);
 
-        binding.bKnow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flashcard.answer(true);
-            }
-        });
-
-        binding.bDontKnow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flashcard.answer(false);
-            }
-        });
-
-        binding.bShowAnswer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flashcard.show();
-            }
-        });
+        binding.bKnow.setOnClickListener(v -> flashcard.answer(true));
+        binding.bDontKnow.setOnClickListener(v -> flashcard.answer(false));
+        binding.bShowAnswer.setOnClickListener(v -> flashcard.confirm());
     }
 }

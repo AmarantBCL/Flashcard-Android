@@ -26,6 +26,19 @@
         android:textSize="20sp"
         android:text=""/>
 
+    <TextView
+        android:id="@+id/tv_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/img_category"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/top_panel"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="A2"
+        />
+
     <ImageView
         android:id="@+id/img_category"
         android:layout_width="16dp"
@@ -121,6 +134,6 @@
         android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="Далее"/>
+        android:text="Показать ответ"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

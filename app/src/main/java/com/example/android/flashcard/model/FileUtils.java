@@ -18,7 +18,7 @@ public class FileUtils {
     private static final String FILEPATH = "vocabulary.txt";
     private static final int FILE_RESOURCE = R.raw.vocabulary;
     private static final Pattern PATTERN = Pattern.compile(
-            "(\\w+)\\s=\\s(.+)\\s\\[(.+)\\]\\s\\((\\w+)\\)",
+            "(.+)\\s=\\s(.+)\\s\\[(.+)\\]\\s\\((\\w+)\\)\\s(\\w+)\\s(.+)",
             Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
 
     public static void readRaw(Context context) {
@@ -44,7 +44,9 @@ public class FileUtils {
             new Word(matcher.group(1),
                     matcher.group(2),
                     matcher.group(3),
-                    WordCategory.valueOf(matcher.group(4))
+                    WordCategory.valueOf(matcher.group(4)),
+                    PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
+                    Level.valueOf(matcher.group(6).toUpperCase())
             );
         }
     }
@@ -62,7 +64,9 @@ public class FileUtils {
                 new Word(matcher.group(1),
                         matcher.group(2),
                         matcher.group(3),
-                        WordCategory.valueOf(matcher.group(4))
+                        WordCategory.valueOf(matcher.group(4)),
+                        PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
+                        Level.valueOf(matcher.group(6).toUpperCase())
                 );
             }
         } catch (IOException e) {

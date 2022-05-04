@@ -9,6 +9,7 @@ public class Vocabulary {
 
     public static int count;
     public static int cardAmount;
+    public static int difficulty;
 
     public static List<Word> getAllWords() {
         return allWords;
@@ -19,7 +20,12 @@ public class Vocabulary {
     }
 
     public static List<Word> getRandomWords() {
-        List<Word> words = new ArrayList<>(allWords);
+        List<Word> words = new ArrayList<>();
+        for (Word word : allWords) {
+            if (word.getLevel().ordinal() == difficulty) {
+                words.add(word);
+            }
+        }
         Collections.shuffle(words);
         return words.subList(0, cardAmount);
     }

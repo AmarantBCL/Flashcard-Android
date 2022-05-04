@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,7 @@ public class MainMenu extends AppCompatActivity {
     private ActivityMainMenuBinding binding;
     private Context context;
     private int cardAmount;
+    private int difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +39,12 @@ public class MainMenu extends AppCompatActivity {
                 Intent intent = new Intent(context, CardActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("card_amount", cardAmount);
+                intent.putExtra("difficulty", difficulty);
                 startActivity(intent);
             }
         });
 
-        binding.bDictionary.setOnClickListener(new View.OnClickListener() {
+        binding.btnDictionary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DictionaryActivity.class);
@@ -47,6 +52,26 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.difficulty_levels));
+        // Определяем разметку для использования при выборе элемента
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Применяем адаптер к элементу spinner
+        binding.spinnerDifficulty.setAdapter(adapter);
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Получаем выбранный объект
+                difficulty = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        binding.spinnerDifficulty.setOnItemSelectedListener(itemSelectedListener);
     }
 
     private boolean checkCardAmount() {

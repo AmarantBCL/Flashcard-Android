@@ -26,12 +26,7 @@ public class Flashcard implements Card {
     @Override
     public void show() {
         if (wordSet.size() <= 0 && !isFinished) {
-            binding.tvWord.setText("ГОТОВО!");
-            binding.tvTranslation.setText("Правильных ответов: " + correct);
-            binding.tvTranscription.setText("");
-            binding.tvOrder.setText(wordSet.size() + "/" + Vocabulary.cardAmount);
-            binding.bShowAnswer.setText("Закончить");
-            isFinished = true;
+            finish();
             return;
         }
         if (isFinished) {
@@ -41,13 +36,12 @@ public class Flashcard implements Card {
             return;
         }
         binding.tvTranslation.setText("");
-        binding.bKnow.setVisibility(View.VISIBLE);
-        binding.bDontKnow.setVisibility(View.VISIBLE);
-        binding.bShowAnswer.setVisibility(View.GONE);
+        showAnswerButton();
         if (wordSet.size() > 0) {
             Word word = wordSet.get(0);
             binding.tvWord.setText(word.getName());
             binding.tvTranscription.setText("[" + word.getTranscription() +"]");
+            binding.tvLevel.setText(word.getLevel().toString());
             binding.imgCategory.setImageResource(ImageUtils.getImageId(context,
                     word.getCategory().name().toLowerCase()));
             binding.tvOrder.setText(wordSet.size() + "/" + Vocabulary.cardAmount);
@@ -55,19 +49,39 @@ public class Flashcard implements Card {
     }
 
     @Override
-    public boolean answer(boolean isCorrect) {
+    public void answer(boolean isCorrect) {
         if (wordSet.size() > 0) {
             correct += isCorrect ? 1 : 0;
-            confirm();
             wordSet.remove(0);
+            show(); // confirm
         }
-        return true;
     }
 
     public void confirm() {
         binding.tvTranslation.setText(wordSet.get(0).getTranslation());
+        showKnowDontKnowButtons();
+    }
+
+    @Override
+    public void finish() {
+        showAnswerButton();
+        binding.tvWord.setText("ГОТОВО!");
+        binding.tvTranslation.setText("Правильных ответов: " + correct);
+        binding.tvTranscription.setText("");
+        binding.tvOrder.setText(wordSet.size() + "/" + Vocabulary.cardAmount);
+        binding.bShowAnswer.setText("Закончить");
+        isFinished = true;
+    }
+
+    private void showAnswerButton() {
         binding.bKnow.setVisibility(View.GONE);
         binding.bDontKnow.setVisibility(View.GONE);
         binding.bShowAnswer.setVisibility(View.VISIBLE);
+    }
+
+    private void showKnowDontKnowButtons() {
+        binding.bKnow.setVisibility(View.VISIBLE);
+        binding.bDontKnow.setVisibility(View.VISIBLE);
+        binding.bShowAnswer.setVisibility(View.GONE);
     }
 }
