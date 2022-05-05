@@ -1,30 +1,26 @@
 package com.example.android.flashcard;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.flashcard.databinding.ActivityCardBinding;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.android.flashcard.databinding.ActivityDictionaryBinding;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 import com.example.android.flashcard.model.WordAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity {
     private ActivityDictionaryBinding binding;
@@ -37,15 +33,20 @@ public class DictionaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         context = this;
 
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MainMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                context.startActivity(intent);
-            }
+        binding.btnAdd.setOnClickListener(v -> {
+            showNewWord();
         });
 
+        binding.btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(context, MainMenu.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            context.startActivity(intent);
+        });
+
+        searchWords();
+    }
+
+    private void searchWords() {
         binding.editSearch.addTextChangedListener(new TextWatcher() {
             private String enteredStr = "";
 
@@ -64,7 +65,6 @@ public class DictionaryActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -72,28 +72,48 @@ public class DictionaryActivity extends AppCompatActivity {
                 enteredStr = s.toString().toLowerCase();
             }
         });
-
-        // список слов
         showWordList(Vocabulary.getAllWords());
     }
 
     private void showWordList(List<Word> words) {
-        // получаем элемент ListView
         ListView wordList = binding.wordList;
-        // создаем адаптер
         WordAdapter adapter = new WordAdapter(this, R.layout.word_item, words);
-        // устанавливаем адаптер
         wordList.setAdapter(adapter);
-        // слушатель выбора в списке
-        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // получаем выбранный пункт
-                Word selectedState = (Word)parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Выбрано слово " + selectedState.getName(),
-                        Toast.LENGTH_SHORT).show();
-            }
+        AdapterView.OnItemLongClickListener longListender = (parent, v, position, id) -> {
+            Word word = (Word) parent.getItemAtPosition(position);
+            showWordInfo(word);
+            return false;
         };
-        wordList.setOnItemClickListener(itemListener);
+        wordList.setOnItemLongClickListener(longListender);
+    }
+
+    private void showNewWord() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(R.layout.dialog_add_word);
+        builder.setTitle("Добавление слова");
+        builder.setPositiveButton("Добавить", null);
+        builder.setNegativeButton("Отмена", null);
+        builder.create();
+        builder.show();
+    }
+
+    private void showWordInfo(Word word) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(word.getName());
+        builder.setIcon(getResources().getIdentifier(word.getCategory().toString().toLowerCase(),
+                "drawable", context.getPackageName()));
+        builder.setMessage(word.getTranslation() + "\n" +
+                "Категория: " + word.getCategory() + "\n" +
+                "Часть речи: " + word.getPartOfSpeech().toString().toLowerCase() + "\n" +
+                "Уровень: " + word.getLevel());
+        builder.setPositiveButton("OK", null);
+        builder.setNeutralButton("Изменить", null);
+        builder.create();
+        builder.show();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

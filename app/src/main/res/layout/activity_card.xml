@@ -39,11 +39,24 @@
         android:text="A2"
         />
 
+    <TextView
+        android:id="@+id/tv_part_of_speech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/tv_level"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/top_panel"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="verb"
+        />
+
     <ImageView
         android:id="@+id/img_category"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:src="@drawable/fruit"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/language"
         app:layout_constraintTop_toTopOf="@id/top_panel"
         app:layout_constraintEnd_toEndOf="@id/top_panel"
         app:layout_constraintBottom_toBottomOf="@id/top_panel"

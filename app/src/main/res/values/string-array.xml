@@ -8,4 +8,17 @@
         <item>Продвинутый</item>
         <item>Свободный</item>
     </string-array>
+    <string-array name="categories">
+        <item>NONE</item>
+        <item>ANIMALS</item>
+        <item>BIOLOGY</item>
+        <item>ENVIRONMENT</item>
+        <item>FOOD</item>
+        <item>GEOGRAPHY</item>
+        <item>MUSIC</item>
+        <item>POLITICS</item>
+        <item>TIME</item>
+        <item>TRANSPORT</item>
+        <item>WAR</item>
+    </string-array>
 </resources>

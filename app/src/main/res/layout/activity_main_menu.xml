@@ -16,7 +16,7 @@
         android:paddingStart="16dp"
         android:text="Всего слов: 10"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:drawableStart="@drawable/ic_dictionary"
         android:drawablePadding="6dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:drawablePadding="6dp"
         android:text="Количество карточек: "
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/e_card_amount"
@@ -60,7 +60,7 @@
         android:text="5"
         android:inputType="number"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="0dp"
@@ -92,7 +92,7 @@
         android:drawablePadding="6dp"
         android:text="Уровень сложности: "
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/spinner_difficulty"

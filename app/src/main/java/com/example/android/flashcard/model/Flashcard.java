@@ -41,6 +41,7 @@ public class Flashcard implements Card {
             Word word = wordSet.get(0);
             binding.tvWord.setText(word.getName());
             binding.tvTranscription.setText("[" + word.getTranscription() +"]");
+            binding.tvPartOfSpeech.setText(word.getPartOfSpeech().toString().toLowerCase());
             binding.tvLevel.setText(word.getLevel().toString());
             binding.imgCategory.setImageResource(ImageUtils.getImageId(context,
                     word.getCategory().name().toLowerCase()));
