@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -29,7 +30,7 @@
         android:id="@+id/edit_word_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/tv_word_category"
+        app:layout_constraintStart_toEndOf="@id/tv_part_of_speech"
         app:layout_constraintTop_toTopOf="@id/tv_word_name"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_word_name"
         android:hint="английское слово"/>
@@ -68,12 +69,57 @@
         android:text="Категория: "/>
 
     <Spinner
+        android:id="@+id/spinner_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/edit_word_name"
         app:layout_constraintTop_toBottomOf="@id/tv_word_translation"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_word_category"
-        android:entries="@array/categories"
-        />
+        android:spinnerMode="dropdown"
+        android:entries="@array/categories"/>
+
+    <TextView
+        android:id="@+id/tv_part_of_speech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_word_category"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Часть речи: "/>
+
+    <Spinner
+        android:id="@+id/spinner_part_of_speech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_word_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_word_translation"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_part_of_speech"
+        android:spinnerMode="dropdown"
+        android:entries="@array/parts_of_speech"/>
+
+    <TextView
+        android:id="@+id/tv_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_part_of_speech"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Уровень: "/>
+
+    <Spinner
+        android:id="@+id/spinner_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_word_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_word_translation"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_difficulty"
+        android:spinnerMode="dropdown"
+        android:entries="@array/levels"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

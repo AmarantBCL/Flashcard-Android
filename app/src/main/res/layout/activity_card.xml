@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/img_category"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/language"
         app:layout_constraintTop_toTopOf="@id/top_panel"
         app:layout_constraintEnd_toEndOf="@id/top_panel"

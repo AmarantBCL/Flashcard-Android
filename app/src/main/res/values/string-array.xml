@@ -8,6 +8,27 @@
         <item>Продвинутый</item>
         <item>Свободный</item>
     </string-array>
+    <string-array name="levels">
+        <item>A1</item>
+        <item>A2</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>C1</item>
+        <item>C2</item>
+    </string-array>
+    <string-array name="parts_of_speech">
+        <item>Noun</item>
+        <item>Adjective</item>
+        <item>Verb</item>
+        <item>Adverb</item>
+        <item>Preposition</item>
+        <item>Conjunction</item>
+        <item>Pronoun</item>
+        <item>Collocation</item>
+        <item>Sentence</item>
+        <item>Phrasal verb</item>
+        <item>Idiom</item>
+    </string-array>
     <string-array name="categories">
         <item>NONE</item>
         <item>ANIMALS</item>

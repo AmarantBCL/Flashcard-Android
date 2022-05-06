@@ -7,19 +7,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.flashcard.databinding.ActivityDictionaryBinding;
+import com.example.android.flashcard.databinding.DialogAddWordBinding;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 import com.example.android.flashcard.model.WordAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DictionaryActivity extends AppCompatActivity {
@@ -44,6 +51,7 @@ public class DictionaryActivity extends AppCompatActivity {
         });
 
         searchWords();
+        //showSpinner();
     }
 
     private void searchWords() {
@@ -88,7 +96,8 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
     private void showNewWord() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        showSpinner();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
         builder.setView(R.layout.dialog_add_word);
         builder.setTitle("Добавление слова");
@@ -108,12 +117,32 @@ public class DictionaryActivity extends AppCompatActivity {
                 "Часть речи: " + word.getPartOfSpeech().toString().toLowerCase() + "\n" +
                 "Уровень: " + word.getLevel());
         builder.setPositiveButton("OK", null);
-        builder.setNeutralButton("Изменить", null);
+        builder.setNegativeButton("Изменить", null);
+        builder.setNeutralButton("Удалить", null);
         builder.create();
         builder.show();
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showSpinner() {
+        // Spinner on AlertDialog
+//        View view = getLayoutInflater().inflate(R.layout.dialog_add_word, null);
+//        Spinner spinner = view.findViewById(R.id.spinner_category);
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item,
+//                getResources().getStringArray(R.array.categories));
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
+
+        // Spinner on the main screen of the dicionary
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item,
+//                getResources().getStringArray(R.array.categories));
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.spinnerTest.setAdapter(adapter);
     }
 }
