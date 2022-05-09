@@ -20,8 +20,10 @@ public class FileUtils {
     private static final Pattern PATTERN = Pattern.compile(
             "(.+)\\s=\\s(.+)\\s\\[(.+)\\]\\s\\((\\w+)\\)\\s(\\w+)\\s(.+)",
             Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+    private static boolean isRead = false;
 
     public static void readRaw(Context context) {
+        if (isRead) return;
         String string;
         StringBuilder sb = new StringBuilder();
         InputStream in = context.getResources().openRawResource(FILE_RESOURCE);
@@ -49,6 +51,7 @@ public class FileUtils {
                     Level.valueOf(matcher.group(6).toUpperCase())
             );
         }
+        isRead = true;
     }
 
     @Deprecated

@@ -5,5 +5,5 @@ public interface Card {
 
     void answer(boolean isCorrect);
 
-    void finish();
+    void end();
 }

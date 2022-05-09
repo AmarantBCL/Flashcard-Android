@@ -1,13 +1,12 @@
 package com.example.android.flashcard;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.flashcard.databinding.ActivityCardBinding;
 import com.example.android.flashcard.model.Flashcard;
-import com.example.android.flashcard.model.Level;
+import com.example.android.flashcard.model.FlashcardUIChanger;
 import com.example.android.flashcard.model.Vocabulary;
 
 public class CardActivity extends AppCompatActivity {
@@ -24,12 +23,17 @@ public class CardActivity extends AppCompatActivity {
         int difficulty = arguments.getInt("difficulty");
 
         Vocabulary.cardAmount = cardAmount;
-        int id = Level.A1.ordinal();
         Vocabulary.difficulty = difficulty;
-        Flashcard flashcard = new Flashcard(binding, this);
+        Flashcard flashcard = new Flashcard(new FlashcardUIChanger(binding, this));
 
         binding.bKnow.setOnClickListener(v -> flashcard.answer(true));
         binding.bDontKnow.setOnClickListener(v -> flashcard.answer(false));
-        binding.bShowAnswer.setOnClickListener(v -> flashcard.confirm());
+        binding.bShowAnswer.setOnClickListener(v -> {
+            if (flashcard.isFinished()) {
+                finish();
+            } else {
+                flashcard.confirm();
+            }
+        });
     }
 }

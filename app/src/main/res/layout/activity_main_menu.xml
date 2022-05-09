@@ -117,15 +117,16 @@
         android:background="@color/black"/>
 
     <Button
-        android:id="@+id/b_start"
+        android:id="@+id/btn_start"
         android:layout_width="130dp"
-        android:layout_height="84dp"
-        android:backgroundTint="@color/teal_700"
+        android:layout_height="80dp"
         android:drawableTop="@drawable/ic_baseline_play_arrow_24"
         android:drawableTint="@color/black"
-        android:text="Начать"
+        android:backgroundTint="@color/teal_700"
+        android:text="НАЧАТЬ"
         android:textColor="@color/white"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -133,29 +134,31 @@
     <Button
         android:id="@+id/btn_dictionary"
         android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:backgroundTint="@color/teal_700"
+        android:layout_height="80dp"
         android:drawableTop="@drawable/ic_baseline_menu_book_24"
         android:drawableTint="@color/black"
-        android:text="Словарь"
+        android:backgroundTint="@color/teal_700"
+        android:text="СЛОВАРЬ"
         android:textColor="@color/white"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/b_start"
+        app:layout_constraintEnd_toStartOf="@id/btn_start"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/b_settings"
         android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:backgroundTint="@color/teal_700"
+        android:layout_height="80dp"
         android:drawableTop="@drawable/ic_baseline_settings_applications_24"
         android:drawableTint="@color/black"
-        android:text="Настройки"
+        android:backgroundTint="@color/teal_700"
+        android:text="НАСТРОЙКИ"
         android:textColor="@color/white"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/b_start" />
+        app:layout_constraintStart_toEndOf="@id/btn_start" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

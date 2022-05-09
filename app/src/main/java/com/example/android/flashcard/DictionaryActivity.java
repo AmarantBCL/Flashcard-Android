@@ -45,13 +45,10 @@ public class DictionaryActivity extends AppCompatActivity {
         });
 
         binding.btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(context, MainMenu.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            context.startActivity(intent);
+            finish();
         });
 
         searchWords();
-        //showSpinner();
     }
 
     private void searchWords() {
@@ -64,6 +61,11 @@ public class DictionaryActivity extends AppCompatActivity {
                 for (Word word : Vocabulary.getAllWords()) {
                     if (word.getName().length() >= enteredStr.length()) {
                         if (enteredStr.equals(word.getName().substring(0, enteredStr.length()))) {
+                            words.add(word);
+                        }
+                    }
+                    if (word.getTranslation().length() >= enteredStr.length()) {
+                        if (enteredStr.equals(word.getTranslation().substring(0, enteredStr.length()))) {
                             words.add(word);
                         }
                     }
