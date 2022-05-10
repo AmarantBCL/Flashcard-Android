@@ -2,12 +2,12 @@ package com.example.android.flashcard.model;
 
 public class Word {
     private final int id;
-    private final String name;
-    private final String translation;
-    private final String transcription;
-    private final WordCategory category;
-    private final PartOfSpeech partOfSpeech;
-    private final Level level;
+    private String name;
+    private String translation;
+    private String transcription;
+    private WordCategory category;
+    private PartOfSpeech partOfSpeech;
+    private Level level;
 
     public String getName() {
         return name;
@@ -43,6 +43,14 @@ public class Word {
         this.partOfSpeech = partOfSpeech;
         this.level = level;
         Vocabulary.add(this);
+    }
+
+    public void edit(String name, String translation, WordCategory category, PartOfSpeech partOfSpeech, Level level) {
+        this.name = name;
+        this.translation = translation;
+        this.category = category;
+        this.partOfSpeech = partOfSpeech;
+        this.level = level;
     }
 
     @Override

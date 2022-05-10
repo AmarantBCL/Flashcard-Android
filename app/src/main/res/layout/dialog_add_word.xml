@@ -13,7 +13,6 @@
         app:constraint_referenced_ids="edit_word_name,edit_word_translation"
         />
 
-
     <TextView
         android:id="@+id/tv_word_name"
         android:layout_width="wrap_content"
@@ -28,7 +27,7 @@
 
     <EditText
         android:id="@+id/edit_word_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/tv_part_of_speech"
         app:layout_constraintTop_toTopOf="@id/tv_word_name"
@@ -49,7 +48,7 @@
 
     <EditText
         android:id="@+id/edit_word_translation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/edit_word_name"
         app:layout_constraintTop_toTopOf="@id/tv_word_translation"

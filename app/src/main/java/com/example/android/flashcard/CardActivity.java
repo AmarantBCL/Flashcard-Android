@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.flashcard.databinding.ActivityCardBinding;
 import com.example.android.flashcard.model.Flashcard;
-import com.example.android.flashcard.model.FlashcardUIChanger;
+import com.example.android.flashcard.viewmodel.FlashcardUIChanger;
 import com.example.android.flashcard.model.Vocabulary;
 
 public class CardActivity extends AppCompatActivity {

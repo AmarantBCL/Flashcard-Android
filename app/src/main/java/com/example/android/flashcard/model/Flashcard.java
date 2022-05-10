@@ -1,5 +1,7 @@
 package com.example.android.flashcard.model;
 
+import com.example.android.flashcard.viewmodel.UIChanger;
+
 import java.util.List;
 
 public class Flashcard implements Card {

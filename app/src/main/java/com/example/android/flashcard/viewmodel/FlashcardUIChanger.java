@@ -1,10 +1,13 @@
-package com.example.android.flashcard.model;
+package com.example.android.flashcard.viewmodel;
 
 import android.content.Context;
 import android.view.View;
 
 import com.example.android.flashcard.R;
 import com.example.android.flashcard.databinding.ActivityCardBinding;
+import com.example.android.flashcard.utils.ImageUtils;
+import com.example.android.flashcard.model.Vocabulary;
+import com.example.android.flashcard.model.Word;
 
 public class FlashcardUIChanger implements UIChanger {
     private final ActivityCardBinding binding;

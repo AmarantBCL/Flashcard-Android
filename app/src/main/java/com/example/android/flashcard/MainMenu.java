@@ -3,16 +3,14 @@ package com.example.android.flashcard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.flashcard.databinding.ActivityMainMenuBinding;
-import com.example.android.flashcard.model.FileUtils;
+import com.example.android.flashcard.utils.FileUtils;
 import com.example.android.flashcard.model.Vocabulary;
 
 public class MainMenu extends AppCompatActivity {
@@ -29,7 +27,9 @@ public class MainMenu extends AppCompatActivity {
         context = this;
 
         Thread thread = new Thread(() -> {
-            FileUtils.readRaw(this);
+            //FileUtils.readRaw(this);
+            //FileUtils.writeInnerFile(this, "abandon = покидать, оставлять [əˈbændən] (NONE) verb B2\n");
+            FileUtils.readInnerFile(this);
             binding.tvTotalWords.setText("Всего слов: " + Vocabulary.count);
         });
         thread.start();

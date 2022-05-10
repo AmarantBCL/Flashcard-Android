@@ -1,4 +1,4 @@
-package com.example.android.flashcard.model;
+package com.example.android.flashcard.utils;
 
 import android.content.Context;
 
