@@ -1,4 +1,4 @@
-package com.example.android.flashcard.model;
+package com.example.android.flashcard.enums;
 
 public enum WordCategory {
     ACCESSORIES, ADVICE, AGREEMENT, AIRCRAFT, AMOUNT, ANIMALS, APPEARANCE, APPLIANCES, ARGUMENT, ART,

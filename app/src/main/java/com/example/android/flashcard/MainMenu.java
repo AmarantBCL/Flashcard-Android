@@ -27,8 +27,6 @@ public class MainMenu extends AppCompatActivity {
         context = this;
 
         Thread thread = new Thread(() -> {
-            //FileUtils.readRaw(this);
-            //FileUtils.writeInnerFile(this, "abandon = покидать, оставлять [əˈbændən] (NONE) verb B2\n");
             FileUtils.readInnerFile(this);
             binding.tvTotalWords.setText("Всего слов: " + Vocabulary.count);
         });

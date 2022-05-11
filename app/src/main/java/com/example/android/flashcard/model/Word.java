@@ -1,5 +1,9 @@
 package com.example.android.flashcard.model;
 
+import com.example.android.flashcard.enums.Level;
+import com.example.android.flashcard.enums.PartOfSpeech;
+import com.example.android.flashcard.enums.WordCategory;
+
 public class Word {
     private final int id;
     private String name;
