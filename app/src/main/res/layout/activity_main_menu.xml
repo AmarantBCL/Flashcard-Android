@@ -40,7 +40,7 @@
         android:background="@color/white"
         android:gravity="start|center"
         android:paddingStart="16dp"
-        android:drawableStart="@drawable/ic_flash_card"
+        android:drawableStart="@drawable/ic_numbers"
         android:drawablePadding="6dp"
         android:text="Количество карточек: "
         android:textColor="@color/black"
@@ -113,6 +113,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/e_card_amount"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_difficulty"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_difficulty"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        android:gravity="start|center"
+        android:paddingStart="16dp"
+        android:drawableStart="@drawable/ic_categories"
+        android:drawablePadding="6dp"
+        android:drawableTint="@color/black"
+        android:text="Категории: "
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinner_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_category"
+        app:layout_constraintTop_toBottomOf="@id/tv_difficulty"
+        app:layout_constraintBottom_toBottomOf="@id/tv_category"
+        android:layout_marginEnd="16dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_difficulty"
         android:layout_marginHorizontal="16dp"
         android:background="@color/black"/>
 

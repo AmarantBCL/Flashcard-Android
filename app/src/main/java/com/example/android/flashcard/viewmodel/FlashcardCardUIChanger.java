@@ -9,12 +9,12 @@ import com.example.android.flashcard.utils.ImageUtils;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 
-public class FlashcardUIChanger implements UIChanger {
+public class FlashcardCardUIChanger implements CardUIChanger {
     private final ActivityCardBinding binding;
     private final Context context;
     private Word word;
 
-    public FlashcardUIChanger(ActivityCardBinding binding, Context context) {
+    public FlashcardCardUIChanger(ActivityCardBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
     }
@@ -24,12 +24,7 @@ public class FlashcardUIChanger implements UIChanger {
         this.word = word;
         binding.tvTranslation.setText("");
         showAnswerButton();
-        binding.tvWord.setText(word.getName());
-        binding.tvTranscription.setText(context.getString(R.string.transcription, word.getTranscription()));
-        binding.tvPartOfSpeech.setText(word.getPartOfSpeech().toString().toLowerCase());
-        binding.tvLevel.setText(word.getLevel().toString());
-        binding.imgCategory.setImageResource(ImageUtils.getImageId(context,
-                word.getCategory().name().toLowerCase()));
+        update();
         binding.tvOrder.setText(order + "/" + Vocabulary.cardAmount);
     }
 
@@ -47,6 +42,15 @@ public class FlashcardUIChanger implements UIChanger {
         binding.tvTranscription.setText("");
         binding.tvOrder.setText("0/" + Vocabulary.cardAmount);
         binding.bShowAnswer.setText("Закончить");
+    }
+
+    public void update() {
+        binding.tvWord.setText(word.getName());
+        binding.tvTranscription.setText(context.getString(R.string.transcription, word.getTranscription()));
+        binding.tvPartOfSpeech.setText(word.getPartOfSpeech().toString().toLowerCase());
+        binding.tvLevel.setText(word.getLevel().toString());
+        binding.imgCategory.setImageResource(ImageUtils.getImageId(context,
+                word.getCategory().name().toLowerCase()));
     }
 
     private void showAnswerButton() {

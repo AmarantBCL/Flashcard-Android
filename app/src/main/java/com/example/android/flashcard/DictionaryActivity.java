@@ -27,15 +27,16 @@ import com.example.android.flashcard.viewmodel.DictionarySearcher;
 
 public class DictionaryActivity extends AppCompatActivity {
     private ActivityDictionaryBinding binding;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDictionaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        context = this;
         DictionarySearcher searcher = new DictionarySearcher(binding, this);
-        DialogManager dialogManager = new DictionaryDialog(this, searcher);
-        binding.btnAdd.setOnClickListener(v -> dialogManager.showAdd());
+        binding.btnAdd.setOnClickListener(v -> new DictionaryDialog(context, searcher).showAdd());
         binding.btnBack.setOnClickListener(v -> finish());
     }
 

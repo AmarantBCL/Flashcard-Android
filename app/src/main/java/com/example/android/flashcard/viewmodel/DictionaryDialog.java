@@ -5,33 +5,33 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.flashcard.R;
-import com.example.android.flashcard.enums.Level;
-import com.example.android.flashcard.enums.PartOfSpeech;
-import com.example.android.flashcard.enums.WordCategory;
+import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
+import com.example.android.flashcard.model.WordTemplate;
 import com.example.android.flashcard.utils.FileUtils;
-import com.example.android.flashcard.utils.StringUtils;
 
 public class DictionaryDialog implements DialogManager {
     private Context context;
     private DictionarySearcher searcher;
+    private DictionaryDialogUIChanger dialogUIChanger;
+    private CardUIChanger cardUiChanger;
     private View view;
-    private EditText editName;
-    private EditText editTranslation;
-    private Spinner spinnerCategory;
-    private Spinner spinnerPartOfSpeech;
-    private Spinner spinnerLevel;
 
     public DictionaryDialog(Context context, DictionarySearcher searcher) {
         this.context = context;
         this.searcher = searcher;
         view = LayoutInflater.from(context).inflate(R.layout.dialog_add_word, null);
-        loadViews();
+        dialogUIChanger = new DictionaryDialogUIChanger(view);
+    }
+
+    public DictionaryDialog(Context context, CardUIChanger cardUiChanger) {
+        this.context = context;
+        this.cardUiChanger = cardUiChanger;
+        view = LayoutInflater.from(context).inflate(R.layout.dialog_add_word, null);
+        dialogUIChanger = new DictionaryDialogUIChanger(view);
     }
 
     @Override
@@ -42,12 +42,8 @@ public class DictionaryDialog implements DialogManager {
         builder.setView(view);
         builder.setTitle("Добавление слова");
         builder.setPositiveButton("Добавить", (dialog, i) -> {
-            if (!editName.getText().toString().isEmpty() && !editTranslation.getText().toString().isEmpty()) {
-                String wordName = editName.getText().toString().toLowerCase().trim();
-                String wordTranslation = editTranslation.getText().toString().toLowerCase().trim();
-                Toast.makeText(view.getContext(),
-                        "Слово '" + wordName + " - " + wordTranslation + "' успешно добавлено",
-                        Toast.LENGTH_LONG).show();
+            if (dialogUIChanger.checkFields()) {
+                add(dialogUIChanger.getWordTemplate());
             } else {
                 Toast.makeText(view.getContext(), "Укажите слово и перевод.", Toast.LENGTH_LONG).show();
             }
@@ -65,11 +61,8 @@ public class DictionaryDialog implements DialogManager {
         builder.setView(view);
         builder.setTitle("Изменение слова " + word.getName());
         builder.setPositiveButton("Подтвердить", (dialog, answer) -> {
-            if (!editName.getText().toString().isEmpty() && !editTranslation.getText().toString().isEmpty()) {
-                change(word, StringUtils.getWordText(editName), StringUtils.getWordText(editTranslation),
-                        WordCategory.valueOf(spinnerCategory.getSelectedItem().toString()),
-                        PartOfSpeech.valueOf(spinnerPartOfSpeech.getSelectedItem().toString()),
-                        Level.valueOf(spinnerLevel.getSelectedItem().toString()));
+            if (dialogUIChanger.checkFields()) {
+                change(word, dialogUIChanger.getWordTemplate());
             } else {
                 Toast.makeText(view.getContext(), "Заполните слово и перевод.", Toast.LENGTH_SHORT).show();
             }
@@ -78,7 +71,7 @@ public class DictionaryDialog implements DialogManager {
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         builder.show();
-        autofill(word);
+        dialogUIChanger.autofill(word);
     }
 
     @Override
@@ -100,33 +93,31 @@ public class DictionaryDialog implements DialogManager {
         builder.show();
     }
 
-    private void change(Word word, String name, String translation, WordCategory category,
-                        PartOfSpeech partOfSpeech, Level level) {
-        word.edit(name, translation, category, partOfSpeech, level);
+    private void change(Word word, WordTemplate wordTemplate) {
+        word.edit(wordTemplate.getName(), wordTemplate.getTranslation(),
+                wordTemplate.getCategory(), wordTemplate.getPartOfSpeech(), wordTemplate.getLevel());
         FileUtils.saveChanges(view.getContext());
-        searcher.update();
-        Toast.makeText(view.getContext(),
-                "Слово '" + word.getName() + "' было отредактировано.",
+        updateUI();
+        Toast.makeText(view.getContext(),"Слово '" + word.getName() + "' было отредактировано.",
                 Toast.LENGTH_LONG).show();
     }
 
-    private void add() {
-        Toast.makeText(context, "add", Toast.LENGTH_LONG).show();
+    private void add(WordTemplate wordTemplate) {
+        new Word(wordTemplate.getName(), wordTemplate.getTranslation(), "-",
+                wordTemplate.getCategory(), wordTemplate.getPartOfSpeech(), wordTemplate.getLevel());
+        FileUtils.saveChanges(view.getContext());
+        Vocabulary.update();
+        updateUI();
+        Toast.makeText(view.getContext(), "Слово '" + wordTemplate.getName() + " - " +
+                wordTemplate.getTranslation() + "' успешно добавлено",Toast.LENGTH_LONG).show();
     }
 
-    private void loadViews() {
-        editName = view.findViewById(R.id.edit_word_name);
-        editTranslation = view.findViewById(R.id.edit_word_translation);
-        spinnerCategory = view.findViewById(R.id.spinner_category);
-        spinnerPartOfSpeech = view.findViewById(R.id.spinner_part_of_speech);
-        spinnerLevel = view.findViewById(R.id.spinner_difficulty);
-    }
-
-    private void autofill(Word word) {
-        editName.setText(word.getName());
-        editTranslation.setText(word.getTranslation());
-        spinnerCategory.setSelection(word.getCategory().ordinal());
-        spinnerPartOfSpeech.setSelection(word.getPartOfSpeech().ordinal());
-        spinnerLevel.setSelection(word.getLevel().ordinal());
+    private void updateUI() {
+        if (searcher != null) {
+            searcher.update();
+        }
+        if (cardUiChanger != null) {
+            cardUiChanger.update();
+        }
     }
 }

@@ -16,15 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DictionarySearcher {
-    private ActivityDictionaryBinding binding;
-    private Context context;
+    private final ActivityDictionaryBinding binding;
+    private final Context context;
     private WordAdapter adapter;
     private String searchInput = "";
 
     public DictionarySearcher(ActivityDictionaryBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
-        clicks();
+        initClicks();
         createList(Vocabulary.getAllWords());
     }
 
@@ -32,7 +32,7 @@ public class DictionarySearcher {
         adapter.notifyDataSetChanged();
     }
 
-    private void clicks() {
+    private void initClicks() {
         binding.editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

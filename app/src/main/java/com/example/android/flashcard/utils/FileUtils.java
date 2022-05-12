@@ -6,9 +6,9 @@ import android.widget.Toast;
 import com.example.android.flashcard.R;
 import com.example.android.flashcard.enums.Level;
 import com.example.android.flashcard.enums.PartOfSpeech;
+import com.example.android.flashcard.enums.WordCategory;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
-import com.example.android.flashcard.enums.WordCategory;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,6 @@ public class FileUtils {
 
     public static void readInnerFile(Context context) {
         if (isRead) return;
-        StringBuilder sb = new StringBuilder();
         try (FileInputStream in = context.openFileInput(FILEPATH)) {
             byte[] bytes = new byte[in.available()];
             in.read(bytes);
@@ -44,20 +44,17 @@ public class FileUtils {
                         PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
                         Level.valueOf(matcher.group(6).toUpperCase())
                 );
-                sb.append(matcher.group() + "\n");
             }
-
         } catch (IOException e) {
             Toast.makeText(context, "Не смогли прочитать файл!", Toast.LENGTH_LONG).show();
         }
-        writeInnerFile(context, sb.toString());
         isRead = true;
     }
 
     public static void writeInnerFile(Context context, String text) {
         try {
             OutputStreamWriter writer = new OutputStreamWriter(
-            context.openFileOutput(FILEPATH, Context.MODE_PRIVATE));
+                    context.openFileOutput(FILEPATH, Context.MODE_PRIVATE));
             writer.write(text);
             writer.close();
         } catch (IOException e) {
@@ -68,6 +65,7 @@ public class FileUtils {
     public static void saveChanges(Context context) {
         StringBuilder sb = new StringBuilder();
         List<Word> allWords = Vocabulary.getAllWords();
+        Collections.sort(allWords, (word1, word2) -> word1.getName().compareToIgnoreCase(word2.getName()));
         for (Word word : allWords) {
             String text = String.format("%s = %s [%s] (%s) %s %s\n",
                     word.getName(),
@@ -95,7 +93,6 @@ public class FileUtils {
             e.printStackTrace();
         }
         Matcher matcher = PATTERN.matcher(sb.toString());
-        StringBuilder b = new StringBuilder();
         while (matcher.find()) {
             new Word(matcher.group(1),
                     matcher.group(2),
@@ -107,5 +104,4 @@ public class FileUtils {
         }
         isRead = true;
     }
-
 }
