@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0"
         android:layout_marginStart="16dp"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="Слово: "/>
 
     <TextView
@@ -26,13 +26,13 @@
         app:layout_constraintStart_toStartOf="@id/word"
         app:layout_constraintEnd_toStartOf="@id/category"
         app:layout_constraintHorizontal_bias="0"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="Перевод: "/>
 
     <ImageView
         android:id="@+id/category"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/word"
         app:layout_constraintBottom_toBottomOf="@id/translation"

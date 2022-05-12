@@ -1,30 +1,29 @@
 package com.example.android.flashcard;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.flashcard.databinding.ActivityCardBinding;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.android.flashcard.databinding.ActivityDictionaryBinding;
+import com.example.android.flashcard.enums.Level;
+import com.example.android.flashcard.enums.PartOfSpeech;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 import com.example.android.flashcard.model.WordAdapter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import com.example.android.flashcard.enums.WordCategory;
+import com.example.android.flashcard.utils.FileUtils;
+import com.example.android.flashcard.viewmodel.DialogManager;
+import com.example.android.flashcard.viewmodel.DictionaryDialog;
+import com.example.android.flashcard.viewmodel.DictionarySearcher;
 
 public class DictionaryActivity extends AppCompatActivity {
     private ActivityDictionaryBinding binding;
@@ -36,64 +35,27 @@ public class DictionaryActivity extends AppCompatActivity {
         binding = ActivityDictionaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         context = this;
-
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MainMenu.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                context.startActivity(intent);
-            }
-        });
-
-        binding.editSearch.addTextChangedListener(new TextWatcher() {
-            private String enteredStr = "";
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                List<Word> words = new ArrayList<>();
-                for (Word word : Vocabulary.getAllWords()) {
-                    if (word.getName().length() >= enteredStr.length()) {
-                        if (enteredStr.equals(word.getName().substring(0, enteredStr.length()))) {
-                            words.add(word);
-                        }
-                    }
-                }
-                showWordList(words);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                enteredStr = s.toString().toLowerCase();
-            }
-        });
-
-        // список слов
-        showWordList(Vocabulary.getAllWords());
+        DictionarySearcher searcher = new DictionarySearcher(binding, this);
+        binding.btnAdd.setOnClickListener(v -> new DictionaryDialog(context, searcher).showAdd());
+        binding.btnBack.setOnClickListener(v -> finish());
     }
 
-    private void showWordList(List<Word> words) {
-        // получаем элемент ListView
-        ListView wordList = binding.wordList;
-        // создаем адаптер
-        WordAdapter adapter = new WordAdapter(this, R.layout.word_item, words);
-        // устанавливаем адаптер
-        wordList.setAdapter(adapter);
-        // слушатель выбора в списке
-        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // получаем выбранный пункт
-                Word selectedState = (Word)parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Выбрано слово " + selectedState.getName(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
-        wordList.setOnItemClickListener(itemListener);
+    private void showSpinner() {
+        // Spinner on AlertDialog
+//        View view = getLayoutInflater().inflate(R.layout.dialog_add_word, null);
+//        Spinner spinner = view.findViewById(R.id.spinner_category);
+//
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item,
+//                getResources().getStringArray(R.array.categories));
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
+
+        // Spinner on the main screen of the dicionary
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+//                android.R.layout.simple_spinner_item,
+//                getResources().getStringArray(R.array.categories));
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.spinnerTest.setAdapter(adapter);
     }
 }

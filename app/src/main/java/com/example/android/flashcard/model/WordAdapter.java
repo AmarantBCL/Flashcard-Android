@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.flashcard.R;
 
@@ -27,7 +26,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = inflater.inflate(this.layout, parent, false);
@@ -36,17 +34,13 @@ public class WordAdapter extends ArrayAdapter<Word> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         Word word = words.get(position);
-
         viewHolder.wordName.setText(word.getName());
         viewHolder.translation.setText(word.getTranslation());
-
         String category = word.getCategory().toString().toLowerCase();
         int resId = getContext().getResources().getIdentifier(category,
                 "drawable", getContext().getPackageName());
         viewHolder.image.setImageResource(resId);
-
         return convertView;
     }
 

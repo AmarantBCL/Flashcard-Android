@@ -29,4 +29,8 @@ public class Vocabulary {
         Collections.shuffle(words);
         return words.subList(0, cardAmount);
     }
+
+    public static void update() {
+        count = allWords.size();
+    }
 }
