@@ -14,11 +14,11 @@ import com.example.android.flashcard.model.WordTemplate;
 import com.example.android.flashcard.utils.FileUtils;
 
 public class DictionaryDialog implements DialogManager {
-    private Context context;
+    private final Context context;
     private DictionarySearcher searcher;
-    private DictionaryDialogUIChanger dialogUIChanger;
+    private final DictionaryDialogUIChanger dialogUIChanger;
     private CardUIChanger cardUiChanger;
-    private View view;
+    private final View view;
 
     public DictionaryDialog(Context context, DictionarySearcher searcher) {
         this.context = context;
