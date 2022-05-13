@@ -45,7 +45,7 @@ public class CardActivity extends AppCompatActivity {
         binding.tvWord.setOnLongClickListener(v -> {
             if (flashcard.getState() != CardState.ANSWER) return false;
             DictionaryDialog dialog = new DictionaryDialog(context, flashcard.getUiChanger());
-            dialog.showInfo(flashcard.getWord());
+            dialog.showChange(flashcard.getWord());
             return false;
         });
     }

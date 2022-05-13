@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.android.flashcard.databinding.ActivityMainMenuBinding;
 import com.example.android.flashcard.model.CategoryAdapter;
 import com.example.android.flashcard.model.CategoryItem;
+import com.example.android.flashcard.model.Mode;
+import com.example.android.flashcard.model.ModeAdapter;
 import com.example.android.flashcard.utils.FileUtils;
 import com.example.android.flashcard.model.Vocabulary;
 
@@ -89,6 +91,22 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+
+        // GridView
+        List<Mode> modes = new ArrayList<>();
+        modes.add(new Mode("Карточки", R.drawable.ic_flashcardb));
+        modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcarda));
+        ModeAdapter modeAdapter = new ModeAdapter(this, R.layout.grid_item, modes);
+        binding.gridMode.setAdapter(modeAdapter);
+        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Mode selectedMode = (Mode) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Был выбран пункт " + selectedMode.getName(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        binding.gridMode.setOnItemClickListener(itemListener);
     }
 
     @Override

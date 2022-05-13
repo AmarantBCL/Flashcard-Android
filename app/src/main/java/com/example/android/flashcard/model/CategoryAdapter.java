@@ -37,17 +37,13 @@ public class CategoryAdapter extends ArrayAdapter<CategoryItem> {
                     R.layout.category_item, parent, false
             );
         }
-
         ImageView image = convertView.findViewById(R.id.img_category);
         TextView textView = convertView.findViewById(R.id.tv_category_name);
-
         CategoryItem item = getItem(position);
-
         if (item != null) {
             image.setImageResource(item.getImageResource());
             textView.setText(item.getName());
         }
-
         return convertView;
     }
 }
