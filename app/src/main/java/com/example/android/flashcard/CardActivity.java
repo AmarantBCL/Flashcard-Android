@@ -33,9 +33,11 @@ public class CardActivity extends AppCompatActivity {
         String mode = arguments.getString("mode");
         int cardAmount = arguments.getInt("card_amount");
         int difficulty = arguments.getInt("difficulty");
+        String category = arguments.getString("category");
 
         Vocabulary.cardAmount = cardAmount;
         Vocabulary.difficulty = difficulty;
+        Vocabulary.category = category;
         switch (mode) {
             case "Карточки":
                 card = new Flashcard(new FlashcardCardUIChanger(binding, this, false));

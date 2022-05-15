@@ -24,10 +24,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
+    private static int BACKGROUND_SELECTED = 0xAA5F9EA0;
+    private static int BACKGROUND_NOT_SELECTED = 0xFFA2DFE7;
     private ActivityMainMenuBinding binding;
     private Context context;
     private int cardAmount;
     private int difficulty;
+    private String category;
     private Mode mode;
 
     @Override
@@ -49,14 +52,15 @@ public class MainMenu extends AppCompatActivity {
                 return;
             }
             if (!checkCardAmount()) {
-                binding.eCardAmount.setError("Неправильное количество карточек!");
+                binding.editCardAmount.setError("Неправильное количество карточек!");
                 return;
             }
-            cardAmount = Integer.valueOf(binding.eCardAmount.getText().toString());
+            cardAmount = Integer.valueOf(binding.editCardAmount.getText().toString());
             Intent intent = new Intent(context, CardActivity.class);
             intent.putExtra("mode", mode.getName());
             intent.putExtra("card_amount", cardAmount);
             intent.putExtra("difficulty", difficulty);
+            intent.putExtra("category", category);
             startActivity(intent);
         });
 
@@ -89,8 +93,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CategoryItem item = (CategoryItem) parent.getItemAtPosition(position);
-                String clicked = item.getName();
-                // TODO Clicks processing
+                category = item.getName();
             }
 
             @Override
@@ -100,11 +103,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         // GridView
-        List<Mode> modes = new ArrayList<>();
-        modes.add(new Mode("Карточки", R.drawable.ic_flashcarda));
-        modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcardb));
-        modes.add(new Mode("Варианты", R.drawable.ic_varianta));
-        modes.add(new Mode("Обратные варианты", R.drawable.ic_variantb));
+        List<Mode> modes = initModes();
         ModeAdapter modeAdapter = new ModeAdapter(this, R.layout.grid_item, modes);
         binding.gridMode.setAdapter(modeAdapter);
         binding.gridMode.setOnItemClickListener((parent, view, position, id) -> {
@@ -112,10 +111,10 @@ public class MainMenu extends AppCompatActivity {
             for (int i = 0; i < parent.getChildCount(); i++) {
                 if (i != position) {
                     View child = parent.getChildAt(i);
-                    child.setBackgroundColor(0xFFA2DFE7);
+                    child.setBackgroundColor(BACKGROUND_NOT_SELECTED);
                 }
             }
-            view.setBackgroundColor(0xAA5F9EA0);
+            view.setBackgroundColor(BACKGROUND_SELECTED);
             mode = selectedMode;
         });
     }
@@ -127,8 +126,17 @@ public class MainMenu extends AppCompatActivity {
     }
 
     private boolean checkCardAmount() {
-        String result = binding.eCardAmount.getText().toString();
+        String result = binding.editCardAmount.getText().toString();
         return !result.isEmpty() && Integer.valueOf(result) <= Vocabulary.count &&
                 Integer.valueOf(result) > 0;
+    }
+
+    private List<Mode> initModes() {
+        List<Mode> modes = new ArrayList<>();
+        modes.add(new Mode("Карточки", R.drawable.ic_flashcarda));
+        modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcardb));
+        modes.add(new Mode("Варианты", R.drawable.ic_varianta));
+        modes.add(new Mode("Обратные варианты", R.drawable.ic_variantb));
+        return modes;
     }
 }

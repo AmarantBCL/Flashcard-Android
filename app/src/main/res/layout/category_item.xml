@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="@id/img_category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/img_category"
-        android:layout_marginStart="8dp"
+        android:layout_marginHorizontal="8dp"
         android:textSize="16sp"
         android:textColor="@color/black"
         android:text="CATEGORY"/>

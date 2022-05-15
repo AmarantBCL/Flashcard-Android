@@ -32,7 +32,7 @@ public class FileUtils {
 
     public static void readInnerFile(Context context) {
         if (isRead) return;
-        File file = new File(FILEPATH);
+        File file = new File(context.getFilesDir().getAbsolutePath() + "/" + FILEPATH);
         if (!file.exists()) {
             readRaw(context);
             return;

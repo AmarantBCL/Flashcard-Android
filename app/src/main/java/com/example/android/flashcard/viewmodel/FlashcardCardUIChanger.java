@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 
 import com.example.android.flashcard.databinding.ActivityCardBinding;
-import com.example.android.flashcard.model.Card;
 
 public class FlashcardCardUIChanger extends CardUIChanger {
     public FlashcardCardUIChanger(ActivityCardBinding binding, Context context, boolean isReversed) {

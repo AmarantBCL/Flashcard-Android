@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:gravity="start|center"
         android:paddingStart="16dp"
-        android:text="Всего слов: 10"
+        android:text="Всего слов: 0"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:drawableStart="@drawable/ic_dictionary"
@@ -47,8 +47,8 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/e_card_amount"
-        android:layout_width="wrap_content"
+        android:id="@+id/edit_card_amount"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintStart_toEndOf="@id/tv_card_amount"
         app:layout_constraintTop_toBottomOf="@id/tv_total_words"
@@ -57,7 +57,7 @@
         android:hint="0"
         android:maxLength="4"
         android:ems="4"
-        android:text="5"
+        android:text="10"
         android:inputType="number"
         android:textColor="@color/black"
         android:textSize="18sp" />
@@ -76,7 +76,7 @@
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/e_card_amount"
+        app:layout_constraintTop_toBottomOf="@id/edit_card_amount"
         android:background="@color/white"/>
 
     <TextView
@@ -112,7 +112,7 @@
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/e_card_amount"
+        app:layout_constraintTop_toBottomOf="@id/edit_card_amount"
         android:layout_marginHorizontal="16dp"
         android:background="@color/black"/>
 
@@ -148,7 +148,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_difficulty"
         app:layout_constraintBottom_toBottomOf="@id/tv_category"
         android:layout_marginTop="-8dp"
-        android:background="@null"
         />
 
     <TextView
