@@ -2,6 +2,7 @@ package com.example.android.flashcard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ public class MainMenu extends AppCompatActivity {
     private Context context;
     private int cardAmount;
     private int difficulty;
+    private Mode mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,17 @@ public class MainMenu extends AppCompatActivity {
         thread.start();
 
         binding.btnStart.setOnClickListener(v -> {
+            if (mode == null) {
+                Toast.makeText(this, "Выберите режим.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (!checkCardAmount()) {
                 binding.eCardAmount.setError("Неправильное количество карточек!");
                 return;
             }
             cardAmount = Integer.valueOf(binding.eCardAmount.getText().toString());
             Intent intent = new Intent(context, CardActivity.class);
+            intent.putExtra("mode", mode.getName());
             intent.putExtra("card_amount", cardAmount);
             intent.putExtra("difficulty", difficulty);
             startActivity(intent);
@@ -94,19 +101,23 @@ public class MainMenu extends AppCompatActivity {
 
         // GridView
         List<Mode> modes = new ArrayList<>();
-        modes.add(new Mode("Карточки", R.drawable.ic_flashcardb));
-        modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcarda));
+        modes.add(new Mode("Карточки", R.drawable.ic_flashcarda));
+        modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcardb));
+        modes.add(new Mode("Варианты", R.drawable.ic_varianta));
+        modes.add(new Mode("Обратные варианты", R.drawable.ic_variantb));
         ModeAdapter modeAdapter = new ModeAdapter(this, R.layout.grid_item, modes);
         binding.gridMode.setAdapter(modeAdapter);
-        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Mode selectedMode = (Mode) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Был выбран пункт " + selectedMode.getName(),
-                        Toast.LENGTH_SHORT).show();
+        binding.gridMode.setOnItemClickListener((parent, view, position, id) -> {
+            Mode selectedMode = (Mode) parent.getItemAtPosition(position);
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                if (i != position) {
+                    View child = parent.getChildAt(i);
+                    child.setBackgroundColor(0xFFA2DFE7);
+                }
             }
-        };
-        binding.gridMode.setOnItemClickListener(itemListener);
+            view.setBackgroundColor(0xAA5F9EA0);
+            mode = selectedMode;
+        });
     }
 
     @Override

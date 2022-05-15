@@ -11,6 +11,7 @@ import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +32,11 @@ public class FileUtils {
 
     public static void readInnerFile(Context context) {
         if (isRead) return;
+        File file = new File(FILEPATH);
+        if (!file.exists()) {
+            readRaw(context);
+            return;
+        }
         try (FileInputStream in = context.openFileInput(FILEPATH)) {
             byte[] bytes = new byte[in.available()];
             in.read(bytes);
@@ -46,7 +52,7 @@ public class FileUtils {
                 );
             }
         } catch (IOException e) {
-            Toast.makeText(context, "Не смогли прочитать файл!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
         isRead = true;
     }
@@ -102,6 +108,7 @@ public class FileUtils {
                     Level.valueOf(matcher.group(6).toUpperCase())
             );
         }
+        saveChanges(context);
         isRead = true;
     }
 }

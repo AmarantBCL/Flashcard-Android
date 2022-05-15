@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.252" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/accessories.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/family.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/farming.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/furniture.xml" value="0.252" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/ic_categories.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/ic_dictionary.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/ic_flash_card.xml" value="0.252" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/ic_flashcarda.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/ic_level.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/none.xml" value="0.252" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Flashcard-Android/app/src/main/res/drawable/religion.xml" value="0.252" />

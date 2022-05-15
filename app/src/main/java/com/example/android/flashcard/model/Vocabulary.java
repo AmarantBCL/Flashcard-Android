@@ -1,8 +1,13 @@
 package com.example.android.flashcard.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Vocabulary {
     private static final List<Word> allWords = new ArrayList<>();

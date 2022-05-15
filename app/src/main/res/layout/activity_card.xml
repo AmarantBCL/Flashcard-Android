@@ -71,10 +71,11 @@
         app:layout_constraintTop_toTopOf="@id/top_panel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.22"
+        android:gravity="center"
         android:paddingHorizontal="16dp"
         android:textSize="26sp"
         android:textColor="@color/black"
-        android:text=""/>
+        android:text="word"/>
 
     <TextView
         android:id="@+id/tv_transcription"
@@ -88,7 +89,7 @@
         android:paddingHorizontal="16dp"
         android:textSize="22sp"
         android:textColor="@color/forest_green"
-        android:text=""/>
+        android:text="[transcription]"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -115,8 +116,55 @@
         android:textColor="@color/black"
         android:text=""/>
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        app:layout_constraintBottom_toTopOf="@id/btn_show_answer">
+
+        <TextView
+            android:id="@+id/option_1"
+            style="@style/card_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:gravity="center"
+            android:text="option 1"/>
+
+        <TextView
+            android:id="@+id/option_2"
+            style="@style/card_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:gravity="center"
+            android:text="option 2"/>
+
+        <TextView
+            android:id="@+id/option_3"
+            style="@style/card_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:gravity="center"
+            android:text="option 3"/>
+
+        <TextView
+            android:id="@+id/option_4"
+            style="@style/card_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:gravity="center"
+            android:text="option 4"/>
+
+    </RadioGroup>
+
     <Button
-        android:id="@+id/b_know"
+        android:id="@+id/btn_know"
         android:layout_width="0dp"
         android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,11 +176,11 @@
         android:text="Знаю"/>
 
     <Button
-        android:id="@+id/b_dont_know"
+        android:id="@+id/btn_dont_know"
         android:layout_width="0dp"
         android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/b_know"
+        app:layout_constraintStart_toEndOf="@id/btn_know"
         app:layout_constraintBottom_toBottomOf="parent"
         android:backgroundTint="@color/firebrick"
         android:textColor="@color/black"
@@ -140,7 +188,7 @@
         android:text="Не знаю"/>
 
     <Button
-        android:id="@+id/b_show_answer"
+        android:id="@+id/btn_show_answer"
         android:layout_width="0dp"
         android:layout_height="70dp"
         app:layout_constraintStart_toStartOf="parent"
