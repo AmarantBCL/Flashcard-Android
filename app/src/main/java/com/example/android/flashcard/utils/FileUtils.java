@@ -11,6 +11,7 @@ import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +32,11 @@ public class FileUtils {
 
     public static void readInnerFile(Context context) {
         if (isRead) return;
+        File file = new File(context.getFilesDir().getAbsolutePath() + "/" + FILEPATH);
+        if (!file.exists()) {
+            readRaw(context);
+            return;
+        }
         try (FileInputStream in = context.openFileInput(FILEPATH)) {
             byte[] bytes = new byte[in.available()];
             in.read(bytes);
@@ -46,7 +52,7 @@ public class FileUtils {
                 );
             }
         } catch (IOException e) {
-            Toast.makeText(context, "Не смогли прочитать файл!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
         isRead = true;
     }
@@ -93,15 +99,20 @@ public class FileUtils {
             e.printStackTrace();
         }
         Matcher matcher = PATTERN.matcher(sb.toString());
-        while (matcher.find()) {
-            new Word(matcher.group(1),
-                    matcher.group(2),
-                    matcher.group(3),
-                    WordCategory.valueOf(matcher.group(4)),
-                    PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
-                    Level.valueOf(matcher.group(6).toUpperCase())
-            );
+        try {
+            while (matcher.find()) {
+                new Word(matcher.group(1),
+                        matcher.group(2),
+                        matcher.group(3),
+                        WordCategory.valueOf(matcher.group(4)),
+                        PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
+                        Level.valueOf(matcher.group(6).toUpperCase())
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        saveChanges(context);
         isRead = true;
     }
 }

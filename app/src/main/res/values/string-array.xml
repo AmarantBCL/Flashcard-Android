@@ -30,6 +30,7 @@
         <item>IDIOM</item>
     </string-array>
     <string-array name="categories">
+        <item>ALL</item>
         <item>ACCESSORIES</item>
         <item>ADVICE</item>
         <item>AGREEMENT</item>

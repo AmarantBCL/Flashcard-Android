@@ -117,7 +117,7 @@ public class DictionaryDialog implements DialogManager {
             searcher.update();
         }
         if (cardUiChanger != null) {
-            cardUiChanger.update();
+            cardUiChanger.update(true);
         }
     }
 }

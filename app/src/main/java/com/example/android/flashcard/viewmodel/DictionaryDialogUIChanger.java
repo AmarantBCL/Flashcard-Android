@@ -43,7 +43,7 @@ public class DictionaryDialogUIChanger {
     public void autofill(Word word) {
         editName.setText(word.getName());
         editTranslation.setText(word.getTranslation());
-        spinnerCategory.setSelection(word.getCategory().ordinal());
+        spinnerCategory.setSelection(word.getCategory().ordinal() + 1);
         spinnerPartOfSpeech.setSelection(word.getPartOfSpeech().ordinal());
         spinnerLevel.setSelection(word.getLevel().ordinal());
     }
