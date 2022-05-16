@@ -99,14 +99,18 @@ public class FileUtils {
             e.printStackTrace();
         }
         Matcher matcher = PATTERN.matcher(sb.toString());
-        while (matcher.find()) {
-            new Word(matcher.group(1),
-                    matcher.group(2),
-                    matcher.group(3),
-                    WordCategory.valueOf(matcher.group(4)),
-                    PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
-                    Level.valueOf(matcher.group(6).toUpperCase())
-            );
+        try {
+            while (matcher.find()) {
+                new Word(matcher.group(1),
+                        matcher.group(2),
+                        matcher.group(3),
+                        WordCategory.valueOf(matcher.group(4)),
+                        PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
+                        Level.valueOf(matcher.group(6).toUpperCase())
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         saveChanges(context);
         isRead = true;

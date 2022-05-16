@@ -50,7 +50,7 @@ public abstract class CardUIChanger {
         this.word = word;
         binding.tvTranslation.setText("");
         beforeAnswer();
-        update();
+        update(false);
         binding.tvOrder.setText(order + "/" + Vocabulary.cardAmount);
     }
 
@@ -70,11 +70,16 @@ public abstract class CardUIChanger {
         binding.tvOrder.setText("0/" + Vocabulary.cardAmount);
         binding.btnShowAnswer.setText("Закончить");
         binding.radioGroup.setVisibility(View.GONE);
+        binding.editTyping.setVisibility(View.GONE);
     }
 
-    public void update() {
+    public void update(boolean isChange) {
         binding.tvWord.setText(isReversed ? word.getTranslation() : word.getName());
-        binding.tvTranscription.setText(isReversed ? "" : context.getString(R.string.transcription, word.getTranscription()));
+        if (isChange) {
+            binding.tvTranscription.setText(context.getString(R.string.transcription, word.getTranscription()));
+        } else {
+            binding.tvTranscription.setText(isReversed ? "" : context.getString(R.string.transcription, word.getTranscription()));
+        }
         binding.tvPartOfSpeech.setText(word.getPartOfSpeech().toString().toLowerCase());
         binding.tvLevel.setText(word.getLevel().toString());
         binding.imgCategory.setImageResource(ImageUtils.getImageId(context,

@@ -9,6 +9,7 @@ public class FlashcardCardUIChanger extends CardUIChanger {
     public FlashcardCardUIChanger(ActivityCardBinding binding, Context context, boolean isReversed) {
         super(binding, context, isReversed);
         binding.radioGroup.setVisibility(View.GONE);
+        getBinding().editTyping.setVisibility(View.GONE);
     }
 
     @Override

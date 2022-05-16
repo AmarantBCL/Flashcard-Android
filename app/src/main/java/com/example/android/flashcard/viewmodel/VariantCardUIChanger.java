@@ -28,6 +28,9 @@ public class VariantCardUIChanger extends CardUIChanger {
 
     public VariantCardUIChanger(ActivityCardBinding binding, Context context, boolean isReversed) {
         super(binding, context, isReversed);
+        getBinding().btnKnow.setVisibility(View.GONE);
+        getBinding().btnDontKnow.setVisibility(View.GONE);
+        getBinding().editTyping.setVisibility(View.GONE);
         initSelections();
     }
 
@@ -61,8 +64,6 @@ public class VariantCardUIChanger extends CardUIChanger {
         isBlocked = false;
         getBinding().btnShowAnswer.setText("Выбрать");
         getBinding().radioGroup.setVisibility(View.VISIBLE);
-        getBinding().btnKnow.setVisibility(View.GONE);
-        getBinding().btnDontKnow.setVisibility(View.GONE);
         getBinding().btnShowAnswer.setVisibility(View.VISIBLE);
     }
 

@@ -53,15 +53,11 @@ public class DictionarySearcher {
     private void search(String searchInput) {
         List<Word> words = new ArrayList<>();
         for (Word word : Vocabulary.getAllWords()) {
-            if (word.getName().length() >= searchInput.length()) {
-                if (searchInput.equals(word.getName().substring(0, searchInput.length()))) {
-                    words.add(word);
-                }
+            if (word.getName().contains(searchInput)) {
+                words.add(word);
             }
-            if (word.getTranslation().length() >= searchInput.length()) {
-                if (searchInput.equals(word.getTranslation().substring(0, searchInput.length()))) {
-                    words.add(word);
-                }
+            if (word.getTranslation().contains(searchInput)) {
+                words.add(word);
             }
         }
         if (searchInput.isEmpty()) {

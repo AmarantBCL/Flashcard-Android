@@ -133,7 +133,7 @@
             android:layout_marginHorizontal="16dp"
             android:padding="8dp"
             android:gravity="center"
-            android:text="option 1"/>
+            android:text=""/>
 
         <View
             android:layout_width="match_parent"
@@ -149,7 +149,7 @@
             android:layout_marginHorizontal="16dp"
             android:padding="8dp"
             android:gravity="center"
-            android:text="option 2"/>
+            android:text=""/>
 
         <View
             android:layout_width="match_parent"
@@ -165,7 +165,7 @@
             android:layout_marginHorizontal="16dp"
             android:padding="8dp"
             android:gravity="center"
-            android:text="option 3"/>
+            android:text=""/>
 
         <View
             android:layout_width="match_parent"
@@ -181,9 +181,23 @@
             android:layout_marginHorizontal="16dp"
             android:padding="8dp"
             android:gravity="center"
-            android:text="option 4"/>
+            android:text=""/>
 
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/edit_typing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_translation"
+        app:layout_constraintBottom_toTopOf="@id/btn_show_answer"
+        android:gravity="center"
+        android:inputType="textNoSuggestions"
+        android:hint="Введите перевод"
+        android:textSize="22sp"
+        android:text=""/>
 
     <Button
         android:id="@+id/btn_know"

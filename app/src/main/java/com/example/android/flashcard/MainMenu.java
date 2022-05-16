@@ -137,6 +137,7 @@ public class MainMenu extends AppCompatActivity {
         modes.add(new Mode("Обратные карточки", R.drawable.ic_flashcardb));
         modes.add(new Mode("Варианты", R.drawable.ic_varianta));
         modes.add(new Mode("Обратные варианты", R.drawable.ic_variantb));
+        modes.add(new Mode("Написание", R.drawable.ic_typing));
         return modes;
     }
 }

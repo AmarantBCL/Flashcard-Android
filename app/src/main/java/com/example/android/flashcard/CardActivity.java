@@ -11,10 +11,12 @@ import com.example.android.flashcard.databinding.ActivityCardBinding;
 import com.example.android.flashcard.enums.CardState;
 import com.example.android.flashcard.model.Card;
 import com.example.android.flashcard.model.Flashcard;
+import com.example.android.flashcard.model.Typing;
 import com.example.android.flashcard.model.Variant;
 import com.example.android.flashcard.viewmodel.DictionaryDialog;
 import com.example.android.flashcard.viewmodel.FlashcardCardUIChanger;
 import com.example.android.flashcard.model.Vocabulary;
+import com.example.android.flashcard.viewmodel.TypingCardUIChanger;
 import com.example.android.flashcard.viewmodel.VariantCardUIChanger;
 
 public class CardActivity extends AppCompatActivity {
@@ -50,6 +52,9 @@ public class CardActivity extends AppCompatActivity {
                 break;
             case "Обратные варианты":
                 card = new Variant(new VariantCardUIChanger(binding, this, true));
+                break;
+            case "Написание":
+                card = new Typing(new TypingCardUIChanger(binding, this, true));
                 break;
             default:
                 break;
