@@ -2,7 +2,6 @@ package com.example.android.flashcard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,11 +15,12 @@ import com.example.android.flashcard.model.CategoryAdapter;
 import com.example.android.flashcard.model.CategoryItem;
 import com.example.android.flashcard.model.Mode;
 import com.example.android.flashcard.model.ModeAdapter;
+import com.example.android.flashcard.model.Word;
 import com.example.android.flashcard.utils.FileUtils;
 import com.example.android.flashcard.model.Vocabulary;
+import com.example.android.flashcard.utils.JsonHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
@@ -117,6 +117,17 @@ public class MainMenu extends AppCompatActivity {
             view.setBackgroundColor(BACKGROUND_SELECTED);
             mode = selectedMode;
         });
+
+        // JSON
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Thread jsonThread = new Thread(() -> {
+            JsonHelper.exportToJSON(this, Vocabulary.getAllWords());
+        });
+        jsonThread.start();
     }
 
     @Override

@@ -3,14 +3,22 @@ package com.example.android.flashcard.model;
 import com.example.android.flashcard.enums.Level;
 import com.example.android.flashcard.enums.PartOfSpeech;
 import com.example.android.flashcard.enums.WordCategory;
+import com.google.gson.annotations.Expose;
 
 public class Word {
+    @Expose
     private final int id;
+    @Expose
     private String name;
+    @Expose
     private String translation;
+    @Expose
     private String transcription;
+    @Expose
     private WordCategory category;
+    @Expose
     private PartOfSpeech partOfSpeech;
+    @Expose
     private Level level;
 
     public String getName() {

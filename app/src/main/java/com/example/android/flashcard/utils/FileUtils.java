@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 public class FileUtils {
     private static final String FILEPATH = "vocabulary.txt";
+    private static final String JSON_FILE = "data.json";
     private static final int FILE_RESOURCE = R.raw.vocabulary;
     private static final Pattern PATTERN = Pattern.compile(
             "(.+)\\s=\\s(.+)\\s\\[(.+)\\]\\s\\((\\w+)\\)\\s(\\w+)\\s(.+)",
@@ -32,11 +33,22 @@ public class FileUtils {
 
     public static void readInnerFile(Context context) {
         if (isRead) return;
-        File file = new File(context.getFilesDir().getAbsolutePath() + "/" + FILEPATH);
+        File file = new File(context.getFilesDir().getAbsolutePath() + "/" + JSON_FILE);
         if (!file.exists()) {
             readRaw(context);
             return;
         }
+        // JSON loading - doesn't work
+//        List<Word> words = JsonHelper.importFromJSON(context);
+//        int count = 0;
+//        for (Word word : words) {
+//            String name = word.getName();
+//            count++;
+//        }
+//        Vocabulary.count = count; // TODO Yes I see it!
+
+//        readRaw(context);
+
         try (FileInputStream in = context.openFileInput(FILEPATH)) {
             byte[] bytes = new byte[in.available()];
             in.read(bytes);
