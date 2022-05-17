@@ -1,7 +1,6 @@
 package com.example.android.flashcard.utils;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.android.flashcard.R;
 import com.example.android.flashcard.enums.Level;
@@ -9,6 +8,7 @@ import com.example.android.flashcard.enums.PartOfSpeech;
 import com.example.android.flashcard.enums.WordCategory;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +26,7 @@ public class FileUtils {
     private static final String FILEPATH = "vocabulary.txt";
     private static final String JSON_FILE = "data.json";
     private static final int FILE_RESOURCE = R.raw.vocabulary;
+    private static final int JSON_RESOURCE = R.raw.data;
     private static final Pattern PATTERN = Pattern.compile(
             "(.+)\\s=\\s(.+)\\s\\[(.+)\\]\\s\\((\\w+)\\)\\s(\\w+)\\s(.+)",
             Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
@@ -38,34 +39,12 @@ public class FileUtils {
             readRaw(context);
             return;
         }
-        // JSON loading - doesn't work
-//        List<Word> words = JsonHelper.importFromJSON(context);
-//        int count = 0;
-//        for (Word word : words) {
-//            String name = word.getName();
-//            count++;
-//        }
-//        Vocabulary.count = count; // TODO Yes I see it!
-
-//        readRaw(context);
-
-        try (FileInputStream in = context.openFileInput(FILEPATH)) {
-            byte[] bytes = new byte[in.available()];
-            in.read(bytes);
-            String text = new String(bytes);
-            Matcher matcher = PATTERN.matcher(text);
-            while (matcher.find()) {
-                new Word(matcher.group(1),
-                        matcher.group(2),
-                        matcher.group(3),
-                        WordCategory.valueOf(matcher.group(4)),
-                        PartOfSpeech.valueOf(matcher.group(5).toUpperCase()),
-                        Level.valueOf(matcher.group(6).toUpperCase())
-                );
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<Word> words = JsonHelper.importFromJSON(context);
+        for (Word word : words) {
+            Vocabulary.getAllWords().add(word);
         }
+        Vocabulary.count = Vocabulary.getAllWords().size();
+        readJsonRaw(context);
         isRead = true;
     }
 
@@ -84,17 +63,29 @@ public class FileUtils {
         StringBuilder sb = new StringBuilder();
         List<Word> allWords = Vocabulary.getAllWords();
         Collections.sort(allWords, (word1, word2) -> word1.getName().compareToIgnoreCase(word2.getName()));
-        for (Word word : allWords) {
-            String text = String.format("%s = %s [%s] (%s) %s %s\n",
-                    word.getName(),
-                    word.getTranslation(),
-                    word.getTranscription(),
-                    word.getCategory().name(),
-                    word.getPartOfSpeech().name().toLowerCase(),
-                    word.getLevel().name());
-            sb.append(text);
-        }
+        JsonHelper.exportToJSON(context, Vocabulary.getAllWords());
         writeInnerFile(context, sb.toString());
+    }
+
+    @Deprecated
+    public static void readJsonRaw(Context context) {
+        if (isRead) return;
+        String string;
+        StringBuilder sb = new StringBuilder();
+        try (InputStream in = context.getResources().openRawResource(JSON_RESOURCE)) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            while ((string = reader.readLine()) != null) {
+                sb.append(string).append("\n");
+            }
+            List<Word> words = JsonHelper.importFromJSON(context); // TODO import another JSON file
+            for (Word word : words) {
+                String name = word.getName();
+                String translation = word.getTranslation();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        isRead = true;
     }
 
     @Deprecated

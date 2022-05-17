@@ -23,7 +23,6 @@ public class JsonHelper {
                 .create();
         DataItems dataItems = new DataItems();
         dataItems.setWords(dataList);
-        //String jsonString = gson.toJson(Vocabulary.getAllWords());
         String jsonString = gson.toJson(dataItems);
         try (FileOutputStream fileOutputStream =
                      context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)) {
@@ -49,13 +48,13 @@ public class JsonHelper {
 
     private static class DataItems {
         @Expose
-        private List<Word> words;
+        List<Word> words;
 
-        public List<Word> getWords() {
+        List<Word> getWords() {
             return words;
         }
 
-        public void setWords(List<Word> words) {
+        void setWords(List<Word> words) {
             this.words = words;
         }
     }

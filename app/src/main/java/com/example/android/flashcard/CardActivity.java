@@ -20,6 +20,10 @@ import com.example.android.flashcard.viewmodel.TypingCardUIChanger;
 import com.example.android.flashcard.viewmodel.VariantCardUIChanger;
 
 public class CardActivity extends AppCompatActivity {
+    public static final String MODE_KEY = "mode";
+    public static final String CARD_AMOUNT_KEY = "card_amount";
+    public static final String DIFFICULTY_KEY = "difficulty";
+    public static final String CATEGORY_KEY = "category";
     private ActivityCardBinding binding;
     private Context context;
     private Card card;
@@ -32,10 +36,10 @@ public class CardActivity extends AppCompatActivity {
         context = this;
 
         Bundle arguments = getIntent().getExtras();
-        String mode = arguments.getString("mode");
-        int cardAmount = arguments.getInt("card_amount");
-        int difficulty = arguments.getInt("difficulty");
-        String category = arguments.getString("category");
+        String mode = arguments.getString(MODE_KEY);
+        int cardAmount = arguments.getInt(CARD_AMOUNT_KEY);
+        int difficulty = arguments.getInt(DIFFICULTY_KEY);
+        String category = arguments.getString(CATEGORY_KEY);
 
         Vocabulary.cardAmount = cardAmount;
         Vocabulary.difficulty = difficulty;

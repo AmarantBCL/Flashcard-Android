@@ -30,6 +30,7 @@ public class DictionarySearcher {
 
     public void update() {
         adapter.notifyDataSetChanged();
+        search(searchInput);
     }
 
     private void initClicks() {

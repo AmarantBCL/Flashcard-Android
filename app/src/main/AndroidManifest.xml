@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flashcard">
         <activity
+            android:screenOrientation="portrait"
             android:name=".DictionaryActivity"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".CardActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenu"
+            android:screenOrientation="portrait"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

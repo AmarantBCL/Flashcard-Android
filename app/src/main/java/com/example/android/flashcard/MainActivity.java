@@ -23,7 +23,7 @@ import com.example.android.flashcard.utils.JsonHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private static int BACKGROUND_SELECTED = 0xAA5F9EA0;
     private static int BACKGROUND_NOT_SELECTED = 0xFFA2DFE7;
     private ActivityMainMenuBinding binding;
@@ -57,10 +57,10 @@ public class MainMenu extends AppCompatActivity {
             }
             cardAmount = Integer.valueOf(binding.editCardAmount.getText().toString());
             Intent intent = new Intent(context, CardActivity.class);
-            intent.putExtra("mode", mode.getName());
-            intent.putExtra("card_amount", cardAmount);
-            intent.putExtra("difficulty", difficulty);
-            intent.putExtra("category", category);
+            intent.putExtra(CardActivity.MODE_KEY, mode.getName());
+            intent.putExtra(CardActivity.CARD_AMOUNT_KEY, cardAmount);
+            intent.putExtra(CardActivity.DIFFICULTY_KEY, difficulty);
+            intent.putExtra(CardActivity.CATEGORY_KEY, category);
             startActivity(intent);
         });
 
