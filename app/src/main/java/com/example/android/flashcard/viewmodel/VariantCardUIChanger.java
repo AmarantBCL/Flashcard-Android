@@ -9,12 +9,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.android.flashcard.R;
 import com.example.android.flashcard.databinding.ActivityCardBinding;
-import com.example.android.flashcard.enums.CardState;
-import com.example.android.flashcard.model.Card;
 import com.example.android.flashcard.model.VariantOption;
-import com.example.android.flashcard.model.Vocabulary;
-import com.example.android.flashcard.model.Word;
-import com.example.android.flashcard.utils.ImageUtils;
 
 public class VariantCardUIChanger extends CardUIChanger {
     private static final int BACKGROUND_CORRECT_COLOR = 0xAA90EE90;
@@ -47,10 +42,12 @@ public class VariantCardUIChanger extends CardUIChanger {
     @Override
     public void beforeAnswer() {
         variantOption = new VariantOption(getWord());
+        int size = variantOption.getOptions().size();
         int count = 0;
         for (int i = 0; i < getBinding().radioGroup.getChildCount(); i++) {
             View view = getBinding().radioGroup.getChildAt(i);
             if (view instanceof TextView) {
+                if (count >= size) continue;
                 TextView textView = (TextView) getBinding().radioGroup.getChildAt(i);
                 textView.setText(isReversed()
                         ? variantOption.getOptions().get(count).getName()
@@ -88,6 +85,7 @@ public class VariantCardUIChanger extends CardUIChanger {
                             tv.setBackgroundColor(0x00000000);
                         }
                     }
+                    if (textView.getText().toString().isEmpty()) return;
                     isSelected = true;
                     chosenId = variantOption.getAnswerId(textView.getText().toString());
                     textView.setBackgroundColor(BACKGROUND_SELECT_COLOR);

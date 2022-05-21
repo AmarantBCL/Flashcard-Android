@@ -8,11 +8,9 @@ import com.example.android.flashcard.enums.PartOfSpeech;
 import com.example.android.flashcard.enums.WordCategory;
 import com.example.android.flashcard.model.Vocabulary;
 import com.example.android.flashcard.model.Word;
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,10 +46,10 @@ public class FileUtils {
         isRead = true;
     }
 
-    public static void writeInnerFile(Context context, String text) {
+    public static void writeInnerFile(Context context, String path, String text) {
         try {
             OutputStreamWriter writer = new OutputStreamWriter(
-                    context.openFileOutput(FILEPATH, Context.MODE_PRIVATE));
+                    context.openFileOutput(path, Context.MODE_PRIVATE));
             writer.write(text);
             writer.close();
         } catch (IOException e) {
@@ -64,7 +62,7 @@ public class FileUtils {
         List<Word> allWords = Vocabulary.getAllWords();
         Collections.sort(allWords, (word1, word2) -> word1.getName().compareToIgnoreCase(word2.getName()));
         JsonHelper.exportToJSON(context, Vocabulary.getAllWords());
-        writeInnerFile(context, sb.toString());
+        writeInnerFile(context, FILEPATH, sb.toString());
     }
 
     @Deprecated

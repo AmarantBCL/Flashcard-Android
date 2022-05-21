@@ -1,9 +1,19 @@
 package com.example.android.flashcard.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.android.flashcard.enums.CardState;
+import com.example.android.flashcard.enums.PartOfSpeech;
+import com.example.android.flashcard.utils.FileUtils;
 import com.example.android.flashcard.viewmodel.CardUIChanger;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public abstract class Card {
     private final CardUIChanger cardUiChanger;
@@ -32,6 +42,7 @@ public abstract class Card {
         this.state = state;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public Card(CardUIChanger cardUiChanger) {
         this.cardUiChanger = cardUiChanger;
         wordSet = Vocabulary.getRandomWords();

@@ -21,14 +21,15 @@ public class VariantOption {
     public VariantOption(Word word) {
         this.word = word;
         options = Vocabulary.getAllWords().stream()
-                .filter(x -> x.getName() != word.getName() &&
-                        x.getTranslation() != word.getTranslation() &&
+                .filter(x -> !x.getName().equals(word.getName()) &&
+                        !x.getTranslation().equals(word.getTranslation()) &&
                         x.getPartOfSpeech() == word.getPartOfSpeech() &&
                         x.getLevel() == word.getLevel())
                 .collect(Collectors.toList());
+        int size = options.size() >= 3 ? 3 : options.size();
         Collections.shuffle(options);
         options = options.stream()
-                .limit(3)
+                .limit(size)
                 .collect(Collectors.toList());
         options.add(word);
         Collections.shuffle(options);
